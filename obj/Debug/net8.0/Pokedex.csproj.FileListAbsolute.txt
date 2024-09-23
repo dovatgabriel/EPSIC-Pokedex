@@ -12,3 +12,4 @@
 /Users/Gabriel/Developer/pokedex/obj/Debug/net8.0/Pokedex.pdb
 /Users/Gabriel/Developer/pokedex/obj/Debug/net8.0/Pokedex.genruntimeconfig.cache
 /Users/Gabriel/Developer/pokedex/obj/Debug/net8.0/ref/Pokedex.dll
+/Users/Gabriel/Developer/pokedex/obj/Debug/net8.0/Pokedex.sourcelink.json

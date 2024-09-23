@@ -1,25 +1,99 @@
 namespace Pokedex {
-  class Pokedex(Pokemon[] pokemons)
+  class Pokedex(Item[] items)
   {
-    public Pokemon[] Pokemons = pokemons;
+    public Item[] items = items;
 
-    public void Show()
+    public void ShowAllPokemons()
     {
-      foreach (Pokemon pokemon in Pokemons)
+      Console.WriteLine("\n\n========= - Pokedex - =========\n");
+
+      foreach (Item item in items)
       {
-        pokemon.Show();
+        string index = item.Index;
+        string prefix = "";
+        string value = "";
+
+        if (!item.Seen)
+        {
+          prefix = "";
+          value = "---------------";
+        }
+        else if (item.Seen && !item.Owned)
+        {
+          prefix = "";
+          value = item.Pokemon.Name;
+        }
+        else if (item.Seen && item.Owned)
+        {
+          prefix = "(-)";
+          value = item.Pokemon.Name;
+        }
+
+        Console.WriteLine(index + " " + prefix + " " + value);
       }
+
+      Console.WriteLine("\n========= - Pokedex - =========\n\n");
+    }
+
+    public Item? GetItem(string index)
+    {
+      foreach (Item item in items)
+      {
+        if (item.Index == index)
+        {
+          return item;
+        }
+      }
+
+      return null;
     }
 
     public void ShowPokemonsOfFamily(string family)
     {
-      foreach (Pokemon pokemon in Pokemons)
+      Console.WriteLine("\n\n========= - " + family + " - =========\n");
+
+      foreach (Item item in items)
       {
-        if (pokemon.Family == family)
+        if (item.Pokemon.Family == family)
         {
-          pokemon.Show();
+          string index = item.Index;
+          string prefix = "";
+          string value = "";
+
+          if (!item.Seen)
+          {
+            prefix = "";
+            value = "---------------";
+          }
+          else if (item.Seen && !item.Owned)
+          {
+            prefix = "";
+            value = item.Pokemon.Name;
+          }
+          else if (item.Seen && item.Owned)
+          {
+            prefix = "(-)";
+            value = item.Pokemon.Name;
+          }
+
+          Console.WriteLine(index + " " + prefix + " " + value);
         }
       }
+
+      Console.WriteLine("\n========= - " + family + " - =========\n\n");
+      Console.ResetColor();
+    }
+
+    public void AddPokemon(string name, string family, string description, float height, float weight)
+    {
+      Pokemon pokemon = new Pokemon(name, family, description, height, weight);
+      Item item = new Item(items.Length.ToString(), pokemon, false, false);
+      Array.Resize(ref items, items.Length + 1);
+      items[items.Length - 1] = item;
+
+      Console.ForegroundColor = ConsoleColor.Green;
+      Console.WriteLine("\n\n(+) Pokemon added !\n\n");
+      Console.ResetColor();
     }
   }
 }
